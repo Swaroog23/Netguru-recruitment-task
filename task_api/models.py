@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.aggregates import Avg
 
 
 class Car(models.Model):
