@@ -3,7 +3,7 @@ from task_api.models import Car, CarRating
 from rest_framework import serializers
 
 
-class CarSerializer(serializers.ModelSerializer):
+class CarSerializerWithAvgRating(serializers.ModelSerializer):
     avg_rating = serializers.FloatField()
 
     class Meta:

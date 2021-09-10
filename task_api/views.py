@@ -1,13 +1,11 @@
-import json
-
 from django.db.models.aggregates import Avg
-from task_api.serializers import CarSerializer
-from task_api.services import get_all_makes, get_models_for_make
+from task_api.serializers import CarRatingSerializer, CarSerializerWithAvgRating
+from task_api.services import get_models_for_make
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import ParseError
-from .models import Car
-from django.db import DatabaseError
+from rest_framework.parsers import JSONParser
+from .models import Car, CarRating
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.decorators import api_view
@@ -16,7 +14,7 @@ from rest_framework.decorators import api_view
 class CarViews(APIView):
     def get(self, request):
         cars = Car.objects.annotate(avg_rating=Avg("rating")).all()
-        serialized_cars = CarSerializer(cars.values(), many=True).data
+        serialized_cars = CarSerializerWithAvgRating(cars.values(), many=True).data
         return Response(data=serialized_cars, status=200)
 
     def post(self, request):
@@ -49,3 +47,22 @@ def delete_car_view(request, id):
         return Response(data="Car deleted", status=200)
     except ObjectDoesNotExist:
         raise NotFound(detail="Model does not exists")
+
+
+@api_view(["POST"])
+def post_car_rating_view(request):
+    if "rating" in request.data.keys() and "car_id" in request.data.keys():
+        if 1 <= request.data["rating"] <= 5:
+            serialized_car_rating = CarRatingSerializer(
+                data={
+                    "rating": request.data["rating"],
+                    "car": request.data["car_id"],
+                }
+            )
+            if serialized_car_rating.is_valid():
+                try:
+                    serialized_car_rating.save()
+                    return Response(data="Rating added", status=201)
+                except:
+                    raise NotFound(detail="Car model does not exists")
+        raise ParseError(detail="Wrong body data provided", code=400)
