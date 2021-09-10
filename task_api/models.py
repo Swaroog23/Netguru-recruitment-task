@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.aggregates import Avg
 
 
 class Car(models.Model):
@@ -7,5 +8,5 @@ class Car(models.Model):
 
 
 class CarRating(models.Model):
-    rating = models.IntegerField()
+    rating = models.IntegerField(null=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="rating")
