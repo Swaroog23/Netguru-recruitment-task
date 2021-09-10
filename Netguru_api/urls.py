@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from task_api.views import CarViews
+from task_api.views import CarViews, delete_car_view
 
-urlpatterns = [path("admin/", admin.site.urls), path("cars/", CarViews.as_view())]
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("cars/", CarViews.as_view()),
+    path("cars/<int:id>", delete_car_view),
+]

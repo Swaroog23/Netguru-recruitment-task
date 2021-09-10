@@ -13,7 +13,7 @@ def get_models_for_make(requested_make):
     try:
         all_makes_response = get_all_makes()
         for make in all_makes_response["Results"]:
-            if make["Make_Name"] == requested_make.upper():
+            if make["Make_Name"] == requested_make:
                 models = requests.get(
                     f"https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{requested_make}?format=json"
                 ).json()
