@@ -16,11 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from task_api.views import CarViews, delete_car_view, post_car_rating_view
+from task_api.views import (
+    CarViews,
+    delete_car_view,
+    get_cars_by_popularity,
+    post_car_rating_view,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("cars/", CarViews.as_view()),
     path("cars/<int:id>", delete_car_view),
     path("rate/", post_car_rating_view),
+    path("popular/", get_cars_by_popularity),
 ]

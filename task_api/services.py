@@ -10,14 +10,10 @@ def get_all_makes():
 
 
 def get_models_for_make(requested_make):
-    try:
-        all_makes_response = get_all_makes()
-        for make in all_makes_response["Results"]:
-            if make["Make_Name"] == requested_make:
-                models = requests.get(
-                    f"https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{requested_make}?format=json"
-                ).json()
-                return models
-
-    except Exception as ex:
-        return ex
+    all_makes_response = get_all_makes()
+    for make in all_makes_response["Results"]:
+        if requested_make.upper() in make["Make_Name"]:
+            models = requests.get(
+                f"https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{requested_make}?format=json"
+            ).json()
+            return models

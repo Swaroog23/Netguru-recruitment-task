@@ -4,7 +4,7 @@ from django.db.models.aggregates import Avg
 
 class Car(models.Model):
     make = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
+    model = models.CharField(max_length=100, unique=True)
 
 
 class CarRating(models.Model):

@@ -11,6 +11,14 @@ class CarSerializerWithAvgRating(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class CarSerializerWithRatingCount(serializers.ModelSerializer):
+    rates_number = serializers.IntegerField()
+
+    class Meta:
+        model = Car
+        fields = "__all__"
+
+
 class CarRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarRating
