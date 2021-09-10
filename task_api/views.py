@@ -14,7 +14,6 @@ from task_api.services import get_models_for_make
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import ParseError
-from rest_framework.parsers import JSONParser
 from .models import Car
 from django.db import IntegrityError
 from rest_framework.exceptions import NotFound
