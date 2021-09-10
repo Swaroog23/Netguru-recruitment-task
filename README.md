@@ -1,8 +1,8 @@
 # Netguru-recruitment-task
-##Task for recruitment at Netguru
+## Task for recruitment at Netguru
 
 
-###Used packages:
+### Used packages:
 Django-rest-framework: For building API, mainly for their serializers </br>
 
 requests: For fetching data from seperate page</br>
@@ -15,8 +15,8 @@ whitenoise, gunicorn: Deployment to heroku</br>
 
 App is dekcerized using docker-compose
 
-###Setup:
+### Setup:
 docker-compose up should set up two containers: one with django app and second one with postgreSql database
 In container with django app, command "python manage.py makemigrations" and "python manage.py migrate" should get the database up and running  
 
-###Used database: PostgreSql
+### Used database: PostgreSql
