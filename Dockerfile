@@ -1,7 +1,9 @@
 # syntax=docker/dockerfile:1
-FROM python:3
+FROM python:3.9.7
 ENV PYTHONUNBUFFERED=1
 WORKDIR /Netguru-recruitment-task
-COPY requirements.txt /Netguru-recruitment-task/
-RUN pip install -r requirements.txt
+# COPY requirements.txt /Netguru-recruitment-task/requirements.txt
 COPY . /Netguru-recruitment-task/
+RUN ls .
+RUN pip install -r requirements.txt
+CMD python manage.py makemigrations && python manage.py migrate && python manage.py seed && python manage.py runserver 0.0.0.0:8000

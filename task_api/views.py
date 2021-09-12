@@ -75,9 +75,9 @@ def post_car_rating_view(request):
 
 @api_view(["GET"])
 def get_cars_by_popularity(request):
-    ordered_cars_by_rating = Car.objects.order_by("rating").annotate(
+    ordered_cars_by_rating = Car.objects.annotate(
         rates_number=Count("rating")
-    )
+    ).order_by("-rates_number")
     ordered_serialized_cars_by_rating = CarSerializerWithRatingCount(
         ordered_cars_by_rating, many=True
     ).data
