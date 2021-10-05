@@ -2,7 +2,6 @@
 FROM python:3.9.7
 ENV PYTHONUNBUFFERED=1
 WORKDIR /Netguru-recruitment-task
-# COPY requirements.txt /Netguru-recruitment-task/requirements.txt
 COPY . /Netguru-recruitment-task/
 RUN ls .
 RUN pip install -r requirements.txt

@@ -4,12 +4,12 @@ data
 # Django #
 *.log
 *.pot
-# *.pyc
-# __pycache__
+*.pyc
+__pycache__
 db.sqlite3
 media
 netguru_venv
-# *.py[cod]
+*.py[cod]
 
 # Backup files # 
 *.bak 
