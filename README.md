@@ -13,6 +13,8 @@ __jsonschema__: To further check if response returned wanted values during testi
 
 __whitenoise__: collecting and serving static files for development server</br>
 
+__python-decouple__: Used for importing data from .env files</br>
+
 App is dockerized using docker-compose
 
 
@@ -22,6 +24,8 @@ App is dockerized using docker-compose
 
 ```
 DEBUG=1
+SECRET_KEY={{django-app secret key}}
+ALLOWED_HOSTS={{Allowed hosts}}
 DB_ENGINE=django.db.backends.postgresql
 DB_TYPE=postgres
 DB_DATABASE_NAME={{db name}}
@@ -46,3 +50,34 @@ This command runs development version of docker-compose, building api and a post
 
 ### Used database: PostgreSql
 You should provide username, password and db name to .env files for app to work properly
+
+### JSON request
+Endpoints accept these arguments over request:
+#### POST:
+- __/cars/__ : "model" - model of the car, string; "make" - manufacturer of the car, string; Validity of maker and model of cars is taken from this API: https://vpic.nhtsa.dot.gov/api/
+
+- __/rate/__: "car_id" - id of the car in the database, int; "rating" - value from 1 to 5, int;
+
+#### DELETE:
+- __/cars/:id__ : "id" - id of a car in db to delete, int;
+
+The two __GET__ requests are:
+ - __/cars/__ - returns all cars with their ratings
+ - __/popular/__ - returns all cars based on their popularit, from the highest to lowest rating
+
+Example of the /cars/ GET response:
+```
+{
+
+  "id" : 1,
+
+  "make" : "Volkswagen",
+
+  "model" : "Golf",
+
+  "avg_rating" : 5.0,
+
+}
+```
+### Heroku:
+This api is avaiable over Heroku under this link: https://api-netguru-task.herokuapp.com/
