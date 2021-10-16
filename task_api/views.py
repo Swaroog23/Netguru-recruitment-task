@@ -22,7 +22,7 @@ from rest_framework.decorators import api_view
 
 class CarViews(APIView):
     def get(self, request):
-        cars = Car.objects.annotate(avg_rating=Avg("rating")).all()
+        cars = Car.objects.annotate(avg_rating=Avg("rating__rating"))
         serialized_cars_with_avg_rating = CarSerializerWithAvgRating(
             cars.values(), many=True
         ).data

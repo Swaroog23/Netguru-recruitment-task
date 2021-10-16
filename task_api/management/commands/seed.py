@@ -22,16 +22,19 @@ def create_car_and_car_rating():
         ["JAGUAR", "F-Type"],
     ]
 
-    for make in makes:
-        car = Car.objects.create(
-            make=make[0],
-            model=make[1],
-        )
-        for _ in range(5):
-            CarRating.objects.create(car_id=car.id, rating=random.randint(1, 5))
+    if Car.objects.count() == 0 and CarRating.objects.count == 0:
 
-    logging.info(f"{car} created.")
-    return car
+        for make in makes:
+            car = Car.objects.create(
+                make=make[0],
+                model=make[1],
+            )
+            for _ in range(5):
+                CarRating.objects.create(car_id=car.id, rating=random.randint(1, 5))
+
+        logging.info(f"{car} created.")
+        return car
+    logging.info("Database seeded!")
 
 
 def run_seed(self):

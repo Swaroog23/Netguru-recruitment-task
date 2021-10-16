@@ -27,7 +27,7 @@ netguru_venv
 .idea/**/uiDesigner.xml 
 .idea/**/gradle.xml 
 .idea/**/libraries 
-*.iws /out/ 
+*.iws /out/
 
 # Python # 
 *.py[cod] 
